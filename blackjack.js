@@ -1,7 +1,11 @@
+const fs = require("fs");
+
 let suits = ["♠️", "♣", "❤", "♦"];
 let cards = ["A", "K", "Q", "J", "10", "9", "8", "7", "6", "5", "4", "3", "2"];
 let playerScore = 0;
 let dealerScore = 0;
+let playerCards = [];
+let dealerCards = [];
 
 function createDeck() {
   let deck = [];
@@ -17,19 +21,14 @@ function createDeck() {
   return deck;
 }
 
-function shuffleCards() {
-  return deck[parseInt(Math.random() * deck.length)];
-}
-function dealCards() {
-  return shuffleCards();
+function dealCards(player) {
+  let index = parseInt(Math.random() * deck.length);
+  player.push(deck[index]);
+  deck.splice(index, 1);
 }
 
 let deck = createDeck();
 
-shuffleCards(deck);
-
-let playerCards = [dealCards(), dealCards()];
-let dealerCards = [dealCards(), dealCards()];
 function getCards(card) {
   return card.value + "" + card.suit;
 }
@@ -78,8 +77,20 @@ function getScore(cardArray) {
   }
   return score;
 }
+function startGame() {
+  // let playerScore = 0;
+  // let dealerScore = 0;
+  // let playerCards = []
+  // let dealerCards = []
+  dealCards(playerCards);
+  dealCards(dealerCards);
+  dealCards(playerCards);
+  dealCards(dealerCards);
+}
+startGame();
 
 updateScores();
+
 console.log(`The Player has been dealt: 
 ${getCards(playerCards[0])}  ${getCards(playerCards[1])}
 The player has ${playerScore}
