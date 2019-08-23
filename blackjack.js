@@ -17,14 +17,19 @@ function createDeck() {
   return deck;
 }
 
-function dealCard() {
+function shuffleCards() {
   return deck[parseInt(Math.random() * deck.length)];
+}
+function dealCards() {
+  return shuffleCards();
 }
 
 let deck = createDeck();
 
-let playerCards = [dealCard(), dealCard()];
-let dealerCards = [dealCard(), dealCard()];
+shuffleCards(deck);
+
+let playerCards = [dealCards(), dealCards()];
+let dealerCards = [dealCards(), dealCards()];
 function getCards(card) {
   return card.value + "" + card.suit;
 }
